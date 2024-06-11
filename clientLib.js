@@ -7,7 +7,7 @@ function parseURL(url) {
 }
 
 function buildRequest({ method, path, headers = {}, body }) {
-    headers['API-Key'] = 'wrong-key';  // Use an incorrect API key
+    headers['API-Key'] = '12345';  // Add the API key
     const headerLines = Object.entries(headers).map(([key, value]) => `${key}: ${value}`).join('\r\n');
     return `${method} ${path} HTTP/1.1\r\n${headerLines}\r\n\r\n${body}`;
 }
