@@ -1,7 +1,7 @@
 const net = require('net');
 
 const routes = {};
-const API_KEY = '012345';  // Sets the API key
+const API_KEY = '12345';  // Sets the API key
 
 function on(method, path, handler) {
     routes[`${method}:${path}`] = handler;
