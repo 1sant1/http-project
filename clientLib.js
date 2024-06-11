@@ -6,14 +6,12 @@ function parseURL(url) {
     return { hostname, port: port || 80, path: pathname };
 }
 
-function buildRequest(method, path, headers, body) {
-    let request = `${method} ${path} HTTP/1.1\r\n`;
-    for (const [key, value] of Object.entries(headers)) {
-        request += `${key}: ${value}\r\n`;
-    }
-    request += `Content-Length: ${Buffer.byteLength(body)}\r\n\r\n${body}`;
-    return request;
+function buildRequest({ method, path, headers, body }) {
+    headers['API-Key'] = '012345';  // Add the API key
+    const headerLines = Object.entries(headers).map(([key, value]) => `${key}: ${value}`).join('\r\n');
+    return `${method} ${path} HTTP/1.1\r\n${headerLines}\r\n\r\n${body}`;
 }
+
 
 function request(method, url, headers = {}, body = '') {
     const { hostname, port, path } = parseURL(url);
